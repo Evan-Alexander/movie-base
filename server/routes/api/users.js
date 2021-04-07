@@ -1,4 +1,5 @@
 const express = require("express");
+const { checkLoggedIn } = require("../../middleware/auth");
 let router = express.Router();
 require("dotenv").config();
 
@@ -29,6 +30,36 @@ router.route("/register").post(async (req, res) => {
       error: error,
     });
   }
+});
+
+router.route("/signin").post(async (req, res) => {
+  try {
+    // Find User
+    let user = await User.findOne({ email: req.body.email });
+    if (!user) return res.status(400).json({ message: "Email does not exist" });
+
+    // Compare Password
+    const compare = await user.comparePassword(req.body.password);
+
+    if (!compare)
+      return res.status(400).json({ message: "Password does not match." });
+
+    // Generate Token
+    const token = user.generateToken();
+
+    // Send Response
+    res.cookie("flickbase-token", token).status(200).send(getUserProps(user));
+  } catch (error) {
+    res.status(400).json({
+      message: "Error",
+      error: error,
+    });
+  }
+});
+
+router.route("/profile").get(checkLoggedIn, async (req, res) => {
+  console.log(req.user);
+  res.status(200).send("ok");
 });
 
 const getUserProps = (user) => {

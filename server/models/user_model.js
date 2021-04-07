@@ -63,6 +63,12 @@ userSchema.methods.generateToken = function () {
   return token;
 };
 
+userSchema.methods.comparePassword = async function (givenPassword) {
+  const user = this;
+  const match = await bcrypt.compare(givenPassword, user.password);
+  return match;
+};
+
 userSchema.statics.emailTaken = async function (email) {
   const user = await this.findOne({ email });
   return !!user;

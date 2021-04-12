@@ -1,5 +1,6 @@
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import GoogleFontLoader from "react-google-font-loader";
+import MainLayout from "./components/hoc/mainLayout";
 
 import Home from "./components/home";
 import Header from "./components/navigation/Header";
@@ -8,9 +9,11 @@ const Routes = () => {
   return (
     <BrowserRouter>
       <Header />
-      <Switch>
-        <Route path="/" component={Home} />
-      </Switch>
+      <MainLayout>
+        <Switch>
+          <Route path="/" component={Home} />
+        </Switch>
+      </MainLayout>
       <GoogleFontLoader
         fonts={[
           { font: "Roboto", weights: [300, 400, 900] },

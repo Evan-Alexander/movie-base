@@ -1,9 +1,8 @@
 import { useReducer, useEffect } from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
 import ArticleCard from "../../utils/ArticleCard";
 import { getArticles } from "../../store/actions/article_actions";
 import { useDispatch, useSelector } from "react-redux";
-import { get } from "mongoose";
 
 const initialSort = {
   sortBy: "_id",
@@ -29,12 +28,29 @@ const Home = () => {
     }
   }, [dispatch, articles]);
 
+  const handleLoadmore = () => {
+    let skip = sort.skip + sort.limit;
+    dispatch(getArticles({ ...sort, skip }));
+    setSort({ skip });
+  };
+
   return (
     <div>
       <div>CAROUSEL</div>
       <Grid container spacing={2} className="article_card">
-        <Grid key={1} item xs={12} sm={6} lg={3}>
-          <ArticleCard />
+        {articles && articles.articles
+          ? articles.articles.map((article) => (
+              <Grid key={article._id} item xs={12} sm={6} lg={3}>
+                <ArticleCard key={article._id} article={article} />
+              </Grid>
+            ))
+          : null}
+      </Grid>
+      <Grid container spacing={2}>
+        <Grid item>
+          <Button onClick={handleLoadmore} variant="contained">
+            Load more
+          </Button>
         </Grid>
       </Grid>
     </div>

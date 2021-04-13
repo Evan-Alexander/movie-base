@@ -116,15 +116,18 @@ router.route("/get_byid/:id").get(async (req, res) => {
   }
 });
 
-router.route("/loadmore").get(async (req, res) => {
+router.route("/loadmore").post(async (req, res) => {
   try {
     let sortArgs = sortArgsHelper(req.body);
+
     const articles = await Article.find({ status: "public" })
       .sort([[sortArgs.sortBy, sortArgs.order]])
       .skip(sortArgs.skip)
       .limit(sortArgs.limit);
+
     res.status(200).json(articles);
   } catch (error) {
+    console.log(error);
     res.status(400).json({ message: "Error fetching articles", error });
   }
 });

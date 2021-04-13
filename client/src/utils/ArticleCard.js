@@ -21,13 +21,10 @@ const ArticleCard = ({ article }) => {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="h2">
-          Some Title
+          {article.title}
         </Typography>
         <Typography variant="body2" component="p">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui,
-          obcaecati maxime rerum eos quas ab ut a odio, similique vel amet
-          voluptatibus magnam temporibus ipsa sed, optio eaque. Corporis,
-          architecto!
+          {article.excerpt}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -38,7 +35,7 @@ const ArticleCard = ({ article }) => {
           size="small"
           color="primary"
           component={RouterLink}
-          to={`/article/id`}
+          to={`/article/${article._id}`}
         >
           Read More
         </Button>

@@ -4,6 +4,7 @@ import {
   SUCCESS_GLOBAL,
   CLEAR_NOTIFICATIONS,
   AUTH_USER,
+  LOGIN_USER,
 } from "../types";
 
 /////// articles ////////
@@ -34,5 +35,10 @@ export const clearNotifications = () => {
 /////// auth ////////
 export const authUser = (user) => ({
   type: AUTH_USER,
+  payload: user,
+});
+
+export const loginUser = (user) => ({
+  type: LOGIN_USER,
   payload: user,
 });

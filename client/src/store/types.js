@@ -7,3 +7,4 @@ export const CLEAR_NOTIFICATIONS = "CLEAR_NOTIFICATIONS";
 
 /////// USERS ////////
 export const AUTH_USER = "AUTH_USER";
+export const LOGIN_USER = "LOGIN_USER";

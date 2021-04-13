@@ -20,6 +20,7 @@ export default function usersReducer(state = DEFAULT_USER_STATE, action) {
         data: { ...state.data, ...action.payload.data },
         auth: action.payload.auth,
       };
+
     default:
       return state;
   }

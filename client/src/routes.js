@@ -4,14 +4,17 @@ import MainLayout from "./components/hoc/mainLayout";
 
 import Home from "./components/home";
 import Header from "./components/navigation/Header";
-
+import Auth from "./components/auth";
+import Contact from "./components/contact";
 const Routes = () => {
   return (
     <BrowserRouter>
       <Header />
       <MainLayout>
         <Switch>
-          <Route path="/" component={Home} />
+          <Route path="/auth" component={Auth} />
+          <Route path="/contact" component={Contact} />
+          <Route exact path="/" component={Home} />
         </Switch>
       </MainLayout>
       <GoogleFontLoader

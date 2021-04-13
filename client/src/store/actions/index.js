@@ -3,6 +3,7 @@ import {
   ERROR_GLOBAL,
   SUCCESS_GLOBAL,
   CLEAR_NOTIFICATIONS,
+  AUTH_USER,
 } from "../types";
 
 /////// articles ////////
@@ -29,3 +30,9 @@ export const clearNotifications = () => {
     });
   };
 };
+
+/////// auth ////////
+export const authUser = (user) => ({
+  type: AUTH_USER,
+  payload: user,
+});

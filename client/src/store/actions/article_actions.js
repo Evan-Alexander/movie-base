@@ -13,8 +13,9 @@ export const getArticles = (sort) => {
       if (prevArts) {
         newArts = [...prevArts, ...arts.data];
       }
-      console.log(arts.data);
       dispatch(articles.getArticles(newArts));
-    } catch (error) {}
+    } catch (error) {
+      dispatch(articles.errorGlobal("There was an error loading articles"));
+    }
   };
 };

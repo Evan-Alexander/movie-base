@@ -5,6 +5,7 @@ import { isAuthUser } from "./store/actions/users_actions";
 
 import GoogleFontLoader from "react-google-font-loader";
 import MainLayout from "./components/hoc/mainLayout";
+import Loader from "./utils/Loader";
 
 import Home from "./components/home";
 import Header from "./components/navigation/Header";
@@ -29,6 +30,8 @@ const Routes = () => {
     <BrowserRouter>
       <Header />
       {loading ? (
+        <Loader />
+      ) : (
         <MainLayout>
           <Switch>
             <Route path="/auth" component={Auth} />
@@ -36,8 +39,6 @@ const Routes = () => {
             <Route exact path="/" component={Home} />
           </Switch>
         </MainLayout>
-      ) : (
-        <p>loading</p>
       )}
 
       <GoogleFontLoader

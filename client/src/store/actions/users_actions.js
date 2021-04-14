@@ -51,3 +51,10 @@ export const isAuthUser = () => {
     }
   };
 };
+
+export const logoutUser = () => {
+  return async (dispatch) => {
+    removeTokenCookie();
+    dispatch(users.logoutUser());
+  };
+};

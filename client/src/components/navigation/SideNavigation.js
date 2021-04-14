@@ -15,7 +15,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 
-const SideDrawer = () => {
+const SideDrawer = ({ signOutUser }) => {
   const [state, setState] = useState(false);
   return (
     <>
@@ -65,9 +65,10 @@ const SideDrawer = () => {
           </ListItem>
           <ListItem
             button
-            component={RouterLink}
-            to="/auth"
-            onClick={() => setState(false)}
+            onClick={() => {
+              signOutUser();
+              setState(false);
+            }}
           >
             <ListItemIcon>
               <VpnKeyIcon />

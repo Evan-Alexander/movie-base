@@ -3,11 +3,17 @@ import { Link, withRouter } from "react-router-dom";
 import SideDrawer from "./SideNavigation";
 import { useSelector, useDispatch } from "react-redux";
 import { clearNotifications } from "../../store/actions/index";
+import { logoutUser } from "../../store/actions/users_actions";
 import { showToast } from "../../utils/tools";
 
 const Header = (props) => {
   const notifications = useSelector((state) => state.notifications);
   const dispatch = useDispatch();
+
+  const signOutUser = () => {
+    dispatch(logoutUser());
+    props.history.push("/");
+  };
 
   useEffect(() => {
     if (notifications && notifications.error) {
@@ -31,7 +37,7 @@ const Header = (props) => {
         >
           FlickBase
         </Link>
-        <SideDrawer />
+        <SideDrawer signOutUser={signOutUser} />
       </div>
     </>
   );

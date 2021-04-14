@@ -10,6 +10,7 @@ import { showToast } from "../../utils/tools";
 const Header = (props) => {
   const [layout, setLayout] = useState("");
   const notifications = useSelector((state) => state.notifications);
+  const users = useSelector((state) => state.users);
   const dispatch = useDispatch();
 
   const signOutUser = () => {
@@ -51,7 +52,7 @@ const Header = (props) => {
         >
           FlickBase
         </Link>
-        <SideDrawer signOutUser={signOutUser} />
+        <SideDrawer users={users} signOutUser={signOutUser} />
       </div>
     </>
   );

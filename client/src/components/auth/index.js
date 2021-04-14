@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser, loginUser } from "../../store/actions/users_actions";
 import { TextField, Button } from "@material-ui/core";
+import PreventAuthRoute from "../hoc/PreventAuthRoute";
 
 const Auth = (props) => {
   const [register, setRegister] = useState(false);
@@ -48,7 +49,7 @@ const Auth = (props) => {
   }, [notifications, props.history]);
 
   return (
-    <>
+    <PreventAuthRoute>
       <div className="auth_container">
         <h1> {register ? "Register" : "Login"}</h1>
         <form className="mt-3" onSubmit={formik.handleSubmit}>
@@ -84,7 +85,7 @@ const Auth = (props) => {
           <Button
             className="mt-3"
             variant="outlined"
-            color="promary"
+            color="primary"
             size="large"
             onClick={() => setRegister(!register)}
           >
@@ -92,7 +93,7 @@ const Auth = (props) => {
           </Button>
         </form>
       </div>
-    </>
+    </PreventAuthRoute>
   );
 };
 

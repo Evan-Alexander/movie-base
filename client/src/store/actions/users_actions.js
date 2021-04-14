@@ -1,6 +1,10 @@
 import * as users from "./index";
 import axios from "axios";
-import { getAuthHeader, removeTokenCookie } from "../../utils/tools";
+import {
+  getAuthHeader,
+  removeTokenCookie,
+  getTokenCookie,
+} from "../../utils/tools";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 export const registerUser = (values) => {
@@ -44,7 +48,10 @@ export const loginUser = (values) => {
 export const isAuthUser = () => {
   return async (dispatch) => {
     try {
-      const user = await axios.get(`/api/users/isauth`, getAuthHeader);
+      if (!getTokenCookie) {
+        throw new Error();
+      }
+      const user = await axios.get(`/api/users/isauth`, getAuthHeader());
       dispatch(users.authUser({ data: user.data, auth: true }));
     } catch (error) {
       dispatch(users.authUser({ data: {}, auth: false }));

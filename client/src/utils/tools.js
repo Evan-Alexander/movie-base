@@ -19,7 +19,8 @@ export const showToast = (type, msg) => {
 };
 
 export const getTokenCookie = () => cookie.load("flickbase-token");
-export const removeTokenCookie = () => cookie.remove("flickbase-token");
-export const getAuthHeader = {
-  headers: { "flickbase-token": getTokenCookie() },
+export const removeTokenCookie = () =>
+  cookie.remove("flickbase-token", { path: "/" });
+export const getAuthHeader = () => {
+  return { headers: { "flickbase-token": getTokenCookie() } };
 };

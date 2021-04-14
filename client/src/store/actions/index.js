@@ -6,6 +6,7 @@ import {
   AUTH_USER,
   LOGIN_USER,
   LOGOUT_USER,
+  SITE_LAYOUT,
 } from "../types";
 
 /////// articles ////////
@@ -46,4 +47,10 @@ export const loginUser = (user) => ({
 
 export const logoutUser = () => ({
   type: LOGOUT_USER,
+});
+
+/////// site ////////
+export const appLayout = (layout) => ({
+  type: SITE_LAYOUT,
+  payload: layout,
 });

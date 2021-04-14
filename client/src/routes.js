@@ -11,6 +11,8 @@ import Home from "./components/home";
 import Header from "./components/navigation/Header";
 import Auth from "./components/auth";
 import Contact from "./components/contact";
+import Dashboard from "./components/dashboard";
+
 const Routes = () => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
@@ -34,6 +36,7 @@ const Routes = () => {
       ) : (
         <MainLayout>
           <Switch>
+            <Route path="/dashboard" component={Dashboard} />
             <Route path="/auth" component={Auth} />
             <Route path="/contact" component={Contact} />
             <Route exact path="/" component={Home} />

@@ -9,3 +9,6 @@ export const CLEAR_NOTIFICATIONS = "CLEAR_NOTIFICATIONS";
 export const AUTH_USER = "AUTH_USER";
 export const LOGIN_USER = "LOGIN_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
+
+/////// SITE ////////
+export const SITE_LAYOUT = "SITE_LAYOUT";

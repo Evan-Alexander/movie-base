@@ -1,5 +1,8 @@
-export const GET_ARTICLES = "GET_ARTICLES";
+/////// articles ////////
 
+export const CLEAR_ARTICLE = "CLEAR_ARTICLE";
+export const GET_ARTICLES = "GET_ARTICLES";
+export const GET_ARTICLE_BY_ID = "GET_ARTICLE_BY_ID";
 /////// notifications ////////
 export const ERROR_GLOBAL = "ERROR_GLOBAL";
 export const SUCCESS_GLOBAL = "SUCCESS_GLOBAL";

@@ -1,5 +1,7 @@
 import {
   GET_ARTICLES,
+  GET_ARTICLE_BY_ID,
+  CLEAR_ARTICLE,
   ERROR_GLOBAL,
   SUCCESS_GLOBAL,
   CLEAR_NOTIFICATIONS,
@@ -13,6 +15,15 @@ import {
 export const getArticles = (articles) => ({
   type: GET_ARTICLES,
   payload: articles,
+});
+
+export const getArticle = (article) => ({
+  type: GET_ARTICLE_BY_ID,
+  payload: article,
+});
+
+export const clearArticle = () => ({
+  type: CLEAR_ARTICLE,
 });
 
 /////// notifications ////////

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import AdminLayout from "../hoc/AdminLayout";
+import AdminLayout from "../../hoc/AdminLayout";
 import { useFormik, FieldArray, FormikProvider } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { addArticle } from "../../store/actions/article_actions";
+import { addArticle } from "../../../store/actions/article_actions";
 import { validation, formValues } from "./ValidationSchema";
-import Loader from "../../utils/Loader";
-import WYSIWYG from "../../utils/forms/wsyiwyg";
+import Loader from "../../../utils/Loader";
+import WYSIWYG from "../../../utils/forms/wsyiwyg";
 
 import {
   TextField,

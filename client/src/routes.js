@@ -15,9 +15,9 @@ import Auth from "./components/auth";
 import Contact from "./components/contact";
 import Dashboard from "./components/dashboard";
 import Profile from "./components/dashboard/profile";
-import Articles from "./components/dashboard/articles";
+import Articles from "./components/dashboard/articles/index";
 import Article from "./components/articles/Article";
-import AddArticle from "./components/articles/AddArticle";
+import AddArticle from "./components/dashboard/articles/AddArticle";
 
 const Routes = () => {
   const [loading, setLoading] = useState(true);

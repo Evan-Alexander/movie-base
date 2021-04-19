@@ -1,6 +1,7 @@
 import {
   GET_ARTICLES,
   GET_ARTICLE_BY_ID,
+  GET_ADMIN_ARTICLES,
   ADD_ARTICLE,
   CLEAR_ARTICLE,
   ERROR_GLOBAL,
@@ -31,6 +32,11 @@ export const clearArticle = () => ({
 export const addArticle = (article) => ({
   type: ADD_ARTICLE,
   payload: article,
+});
+
+export const getPaginateArticles = (articles) => ({
+  type: GET_ADMIN_ARTICLES,
+  payload: articles,
 });
 
 /////// notifications ////////

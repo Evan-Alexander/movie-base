@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import AdminLayout from "../hoc/AdminLayout";
 import { useFormik, FieldArray, FormikProvider } from "formik";
 import { useDispatch, useSelector } from "react-redux";
+import { addArticle } from "../../store/actions/article_actions";
 import { validation, formValues } from "./ValidationSchema";
 import Loader from "../../utils/Loader";
 import WYSIWYG from "../../utils/forms/wsyiwyg";
@@ -33,9 +34,11 @@ const AddArticle = (props) => {
     initialValues: formValues,
     validationSchema: validation,
     onSubmit: (values, { resetForm }) => {
-      console.log(values);
+      setIsSubmitting(true);
+      dispatch(addArticle(values));
     },
   });
+
   const handleEditorState = (state) => {
     formik.setFieldValue("content", state, true);
   };
@@ -133,8 +136,10 @@ const AddArticle = (props) => {
                     />
                     <IconButton
                       onClick={() => {
-                        arrayhelpers.push(actorsValue.current.value);
-                        actorsValue.current.value = "";
+                        if (actorsValue.current.value !== "") {
+                          arrayhelpers.push(actorsValue.current.value);
+                          actorsValue.current.value = "";
+                        }
                       }}
                     >
                       <AddIcon />

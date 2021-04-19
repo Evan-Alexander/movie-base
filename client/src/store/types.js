@@ -1,8 +1,10 @@
 /////// articles ////////
-
 export const CLEAR_ARTICLE = "CLEAR_ARTICLE";
 export const GET_ARTICLES = "GET_ARTICLES";
 export const GET_ARTICLE_BY_ID = "GET_ARTICLE_BY_ID";
+/////// admin articles ////////
+export const ADD_ARTICLE = "ADD_ARTICLE";
+
 /////// notifications ////////
 export const ERROR_GLOBAL = "ERROR_GLOBAL";
 export const SUCCESS_GLOBAL = "SUCCESS_GLOBAL";

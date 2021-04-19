@@ -3,7 +3,14 @@ import { Table, Pagination } from "react-bootstrap";
 import Moment from "react-moment";
 import Loader from "../../../utils/Loader";
 
-const ArticlesPagination = ({ articles, prev, next, handleStatusChange }) => {
+const ArticlesPagination = ({
+  articles,
+  prev,
+  next,
+  handleStatusChange,
+  editArtsAction,
+  handleShow,
+}) => {
   const goToPrevPage = (page) => {
     prev(page);
   };
@@ -32,13 +39,13 @@ const ArticlesPagination = ({ articles, prev, next, handleStatusChange }) => {
                   <td>{item.score}</td>
                   <td
                     className="action_btn remove_btn"
-                    onClick={() => alert(item._id)}
+                    onClick={() => handleShow(item._id)}
                   >
                     Remove
                   </td>
                   <td
                     className="action_btn edit_btn"
-                    onClick={() => alert(item._id)}
+                    onClick={() => editArtsAction(item._id)}
                   >
                     Edit
                   </td>

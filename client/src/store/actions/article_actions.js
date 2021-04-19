@@ -85,3 +85,19 @@ export const changeArticleStatus = (status, _id) => {
     }
   };
 };
+
+export const removeArticle = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.delete(
+        `/api/articles/admin/${id}`,
+        getAuthHeader()
+      );
+
+      dispatch(articles.removeArticle());
+      dispatch(articles.successGlobal());
+    } catch (error) {
+      dispatch(articles.errorGlobal(error.response.data.message));
+    }
+  };
+};

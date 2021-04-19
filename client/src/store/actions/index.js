@@ -12,6 +12,7 @@ import {
   LOGIN_USER,
   LOGOUT_USER,
   SITE_LAYOUT,
+  REMOVE_ARTICLE,
 } from "../types";
 
 /////// articles ////////
@@ -63,6 +64,10 @@ export const clearNotifications = () => {
     });
   };
 };
+
+export const removeArticle = () => ({
+  type: REMOVE_ARTICLE,
+});
 
 /////// auth ////////
 export const authUser = (user) => ({

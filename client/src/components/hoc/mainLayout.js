@@ -12,7 +12,7 @@ const MainLayout = (props) => {
       }`}
     >
       {props.children}
-      <ToastContainer />
+      <ToastContainer autoClose={2000} />
     </Container>
   );
 };

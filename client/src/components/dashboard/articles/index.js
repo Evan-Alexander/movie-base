@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
-import { getPaginateArticles } from "../../../store/actions/article_actions";
+import {
+  getPaginateArticles,
+  changeArticleStatus,
+} from "../../../store/actions/article_actions";
 import AdminLayout from "../../../components/hoc/AdminLayout";
 import SearchIcon from "@material-ui/icons/Search";
 import ArticlesPagination from "./Paginate";
@@ -21,6 +24,11 @@ const Articles = () => {
   useEffect(() => {
     dispatch(getPaginateArticles());
   }, [dispatch]);
+
+  const handleStatusChange = (status, _id) => {
+    let newStatus = status === "draft" ? "public" : "draft";
+    dispatch(changeArticleStatus(newStatus, _id));
+  };
 
   const goToPrevPage = (page) => {
     dispatch(getPaginateArticles(page));
@@ -54,6 +62,7 @@ const Articles = () => {
           articles={articles}
           prev={(page) => goToPrevPage(page)}
           next={(page) => goToNextPage(page)}
+          handleStatusChange={(status, id) => handleStatusChange(status, id)}
         />
       </div>
     </AdminLayout>

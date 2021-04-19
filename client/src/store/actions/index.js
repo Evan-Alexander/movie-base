@@ -3,6 +3,7 @@ import {
   GET_ARTICLE_BY_ID,
   GET_ADMIN_ARTICLES,
   ADD_ARTICLE,
+  CHANGE_ARTICLE_STATUS,
   CLEAR_ARTICLE,
   ERROR_GLOBAL,
   SUCCESS_GLOBAL,
@@ -37,6 +38,11 @@ export const addArticle = (article) => ({
 export const getPaginateArticles = (articles) => ({
   type: GET_ADMIN_ARTICLES,
   payload: articles,
+});
+
+export const changeArticleStatus = (article) => ({
+  type: CHANGE_ARTICLE_STATUS,
+  payload: article,
 });
 
 /////// notifications ////////

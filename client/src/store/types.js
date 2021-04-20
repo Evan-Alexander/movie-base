@@ -7,6 +7,7 @@ export const ADD_ARTICLE = "ADD_ARTICLE";
 export const GET_ADMIN_ARTICLES = "GET_ADMIN_ARTICLES";
 export const CHANGE_ARTICLE_STATUS = "CHANGE_ARTICLE_STATUS";
 export const REMOVE_ARTICLE = "REMOVE_ARTICLE";
+export const UPDATE_ARTICLE = "UPDATE_ARTICLE";
 
 /////// notifications ////////
 export const ERROR_GLOBAL = "ERROR_GLOBAL";

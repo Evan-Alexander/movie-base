@@ -67,7 +67,7 @@ const Articles = (props) => {
       <div className="articles_table">
         <ButtonToolbar className="mb-3">
           <ButtonGroup className="mr-2">
-            <LinkContainer to="\dashboard/articles/add">
+            <LinkContainer to="/dashboard/articles/add">
               <Button variant="secondary">Add Article</Button>
             </LinkContainer>
           </ButtonGroup>

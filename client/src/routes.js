@@ -18,6 +18,7 @@ import Profile from "./components/dashboard/profile";
 import Articles from "./components/dashboard/articles/index";
 import Article from "./components/articles/Article";
 import AddArticle from "./components/dashboard/articles/AddArticle";
+import EditArticle from "./components/dashboard/articles/EditArticle";
 
 const Routes = () => {
   const [loading, setLoading] = useState(true);
@@ -42,6 +43,10 @@ const Routes = () => {
       ) : (
         <MainLayout>
           <Switch>
+            <Route
+              path="/dashboard/articles/edit/:id"
+              component={AuthGuard(EditArticle, true)}
+            />
             <Route
               path="/dashboard/articles/add"
               component={AuthGuard(AddArticle, true)}

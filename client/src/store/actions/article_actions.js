@@ -101,3 +101,33 @@ export const removeArticle = (id) => {
     }
   };
 };
+
+export const getAdminArticleById = (id) => {
+  return async (dispatch) => {
+    try {
+      const request = await axios.get(
+        `/api/articles/admin/${id}`,
+        getAuthHeader()
+      );
+      dispatch(articles.getArticle(request.data));
+    } catch (error) {
+      dispatch(articles.getArticle(error.response.data.message));
+    }
+  };
+};
+
+export const updateArticle = (article, id) => {
+  return async (dispatch) => {
+    try {
+      const updatedArticle = await axios.patch(
+        `/api/articles/admin/${id}`,
+        article,
+        getAuthHeader()
+      );
+      dispatch(articles.getArticle(updatedArticle.data));
+      dispatch(articles.successGlobal("Article Updated."));
+    } catch (error) {
+      dispatch(articles.getArticle(error.response.data.message));
+    }
+  };
+};

@@ -4,6 +4,7 @@ import {
   GET_ADMIN_ARTICLES,
   ADD_ARTICLE,
   CHANGE_ARTICLE_STATUS,
+  CHANGE_USER_EMAIL,
   CLEAR_ARTICLE,
   ERROR_GLOBAL,
   SUCCESS_GLOBAL,
@@ -44,6 +45,11 @@ export const getPaginateArticles = (articles) => ({
 export const changeArticleStatus = (article) => ({
   type: CHANGE_ARTICLE_STATUS,
   payload: article,
+});
+
+export const changeUserEmail = (data) => ({
+  type: CHANGE_USER_EMAIL,
+  payload: data,
 });
 
 /////// notifications ////////

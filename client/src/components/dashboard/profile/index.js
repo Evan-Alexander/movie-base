@@ -1,10 +1,10 @@
 import React from "react";
 import AdminLayout from "../../../components/hoc/AdminLayout";
-
+import AuthProfile from "./AuthProfile";
 const Profile = () => {
   return (
     <AdminLayout section="Profile">
-      <p>profile</p>
+      <AuthProfile />
     </AdminLayout>
   );
 };

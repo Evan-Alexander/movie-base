@@ -65,3 +65,22 @@ export const logoutUser = () => {
     dispatch(users.logoutUser());
   };
 };
+
+export const changeEmail = (data) => {
+  return async (dispatch) => {
+    try {
+      await axios.patch(
+        `/api/users/update_email`,
+        {
+          email: data.email,
+          newemail: data.newemail,
+        },
+        getAuthHeader()
+      );
+      dispatch(users.changeUserEmail(data.newemail));
+      dispatch(users.successGlobal("Email changed."));
+    } catch (error) {
+      dispatch(users.errorGlobal(error.response.data.message));
+    }
+  };
+};

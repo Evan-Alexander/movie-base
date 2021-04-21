@@ -14,6 +14,7 @@ import {
   LOGOUT_USER,
   SITE_LAYOUT,
   REMOVE_ARTICLE,
+  UPDATE_USER_PROFILE,
 } from "../types";
 
 /////// articles ////////
@@ -50,6 +51,11 @@ export const changeArticleStatus = (article) => ({
 export const changeUserEmail = (data) => ({
   type: CHANGE_USER_EMAIL,
   payload: data,
+});
+
+export const updateUserProfile = (userdata) => ({
+  type: UPDATE_USER_PROFILE,
+  payload: userdata,
 });
 
 /////// notifications ////////

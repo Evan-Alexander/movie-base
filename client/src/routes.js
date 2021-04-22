@@ -6,7 +6,7 @@ import { isAuthUser } from "./store/actions/users_actions";
 import AuthGuard from "./components/hoc/AuthGuard";
 
 import GoogleFontLoader from "react-google-font-loader";
-import MainLayout from "./components/hoc/MainLayout";
+import MainLayout from "./hoc/MainLayout";
 import Loader from "./utils/Loader";
 
 import Home from "./components/home";

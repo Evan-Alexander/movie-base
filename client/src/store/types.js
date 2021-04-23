@@ -2,6 +2,7 @@
 export const CLEAR_ARTICLE = "CLEAR_ARTICLE";
 export const GET_ARTICLES = "GET_ARTICLES";
 export const GET_ARTICLE_BY_ID = "GET_ARTICLE_BY_ID";
+export const NAV_SEARCH = "NAV_SEARCH";
 /////// admin articles ////////
 export const ADD_ARTICLE = "ADD_ARTICLE";
 export const GET_ADMIN_ARTICLES = "GET_ADMIN_ARTICLES";

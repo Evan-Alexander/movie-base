@@ -5,6 +5,7 @@ import {
   ADD_ARTICLE,
   GET_ADMIN_ARTICLES,
   CHANGE_ARTICLE_STATUS,
+  NAV_SEARCH,
 } from "../types";
 
 export default function articleReducer(state = {}, action) {
@@ -25,6 +26,8 @@ export default function articleReducer(state = {}, action) {
           docs: action.payload,
         },
       };
+    case NAV_SEARCH:
+      return { ...state, navsearch: action.payload };
     case CLEAR_ARTICLE:
       return { ...state, current: "" };
     default:

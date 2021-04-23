@@ -131,3 +131,18 @@ export const updateArticle = (article, id) => {
     }
   };
 };
+
+export const getNavSearchResults = (page = 1, limit = 5, keywords = "") => {
+  return async (dispatch) => {
+    try {
+      const request = await axios.post(`/api/articles/user/search`, {
+        keywords,
+        page,
+        limit,
+      });
+      dispatch(articles.navSearch(request.data));
+    } catch (error) {
+      dispatch(articles.getArticle(error.response.data.message));
+    }
+  };
+};

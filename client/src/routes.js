@@ -19,6 +19,7 @@ import Articles from "./components/dashboard/articles/index";
 import Article from "./components/articles/Article";
 import AddArticle from "./components/dashboard/articles/AddArticle";
 import EditArticle from "./components/dashboard/articles/EditArticle";
+import SearchPage from "./components/search";
 
 const Routes = () => {
   const [loading, setLoading] = useState(true);
@@ -59,6 +60,7 @@ const Routes = () => {
             <Route path="/dashboard" component={AuthGuard(Dashboard)} />
             <Route path="/article/:id" component={Article} />
             <Route path="/auth" component={Auth} />
+            <Route path="/searchresults" component={SearchPage} />
             <Route path="/contact" component={Contact} />
             <Route exact path="/" component={Home} />
           </Switch>

@@ -15,6 +15,7 @@ import {
   SITE_LAYOUT,
   REMOVE_ARTICLE,
   UPDATE_USER_PROFILE,
+  NAV_SEARCH,
 } from "../types";
 
 /////// articles ////////
@@ -30,6 +31,12 @@ export const getArticle = (article) => ({
 
 export const clearArticle = () => ({
   type: CLEAR_ARTICLE,
+});
+
+/////// Search ////////
+export const navSearch = (articles) => ({
+  type: NAV_SEARCH,
+  payload: articles,
 });
 
 /////// admin articles ////////

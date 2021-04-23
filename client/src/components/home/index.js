@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from "react";
+import { useReducer, useEffect, useState } from "react";
 import { Grid, Button } from "@material-ui/core";
 import ArticleCard from "../../utils/ArticleCard";
 import { getArticles } from "../../store/actions/article_actions";
@@ -33,10 +33,8 @@ const Home = () => {
     dispatch(getArticles({ ...sort, skip }));
     setSort({ skip });
   };
-
   return (
     <div>
-      <div>CAROUSEL</div>
       <Grid container spacing={2} className="article_card">
         {articles && articles.articles
           ? articles.articles.map((article) => (
@@ -46,6 +44,7 @@ const Home = () => {
             ))
           : null}
       </Grid>
+
       <Grid container spacing={2}>
         <Grid item>
           <Button onClick={handleLoadmore} variant="contained">

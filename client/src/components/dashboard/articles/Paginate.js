@@ -4,7 +4,7 @@ import Moment from "react-moment";
 import Loader from "../../../utils/Loader";
 
 const ArticlesPagination = ({
-  articles,
+  arts,
   prev,
   next,
   handleStatusChange,
@@ -19,7 +19,7 @@ const ArticlesPagination = ({
   };
   return (
     <>
-      {articles && articles.docs ? (
+      {arts && arts.docs ? (
         <>
           <Table striped bordered hover>
             <thead>
@@ -30,7 +30,7 @@ const ArticlesPagination = ({
               </tr>
             </thead>
             <tbody>
-              {articles.docs.map((item) => (
+              {arts.docs.map((item) => (
                 <tr key={item.id}>
                   <td>
                     <Moment to={item.date}></Moment>
@@ -60,29 +60,21 @@ const ArticlesPagination = ({
             </tbody>
           </Table>
           <Pagination>
-            {articles.hasPrevPage ? (
+            {arts.hasPrevPage ? (
               <>
-                <Pagination.Prev
-                  onClick={() => goToPrevPage(articles.prevPage)}
-                />
-                <Pagination.Item
-                  onClick={() => goToPrevPage(articles.prevPage)}
-                >
-                  {articles.prevPage}
+                <Pagination.Prev onClick={() => goToPrevPage(arts.prevPage)} />
+                <Pagination.Item onClick={() => goToPrevPage(arts.prevPage)}>
+                  {arts.prevPage}
                 </Pagination.Item>
               </>
             ) : null}
-            <Pagination.Item active>{articles.page}</Pagination.Item>
-            {articles.hasNextPage ? (
+            <Pagination.Item active>{arts.page}</Pagination.Item>
+            {arts.hasNextPage ? (
               <>
-                <Pagination.Item
-                  onClick={() => goToNextPage(articles.nextPage)}
-                >
-                  {articles.nextPage}
+                <Pagination.Item onClick={() => goToNextPage(arts.nextPage)}>
+                  {arts.nextPage}
                 </Pagination.Item>
-                <Pagination.Next
-                  onClick={() => goToNextPage(articles.nextPage)}
-                />
+                <Pagination.Next onClick={() => goToNextPage(arts.nextPage)} />
               </>
             ) : null}
           </Pagination>

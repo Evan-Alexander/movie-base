@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from "react";
-import {
-  getPaginateArticles,
-  changeArticleStatus,
-  removeArticle,
-} from "../../../store/actions/article_actions";
-import AdminLayout from "../../../components/hoc/AdminLayout";
-import SearchIcon from "@material-ui/icons/Search";
-import ArticlesPagination from "./Paginate";
+import React, { useEffect, useState, useReducer } from "react";
+import AdminLayout from "../../hoc/AdminLayout";
+import PaginationComponent from "./Paginate";
+import Loader from "../../../utils/Loader";
+
 import {
   Modal,
   Button,
@@ -16,16 +12,40 @@ import {
   FormControl,
 } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+
 import { useDispatch, useSelector } from "react-redux";
+import {
+  getPaginateArticles,
+  removeArticle,
+  changeArticleStatus,
+} from "../../../store/actions/article_actions";
+
 const Articles = (props) => {
-  const articles = useSelector((state) => state.articles.adminArticles);
+  const articles = useSelector((state) => state.articles);
   const notifications = useSelector((state) => state.notifications);
   const dispatch = useDispatch();
   const [removeAlert, setRemoveAlert] = useState(false);
-  const [articleToRemove, setArticleToRemove] = useState(null);
+  const [toRemove, setToRemove] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [searchValues, setSearchValues] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    { value: "", memory: "" }
+  );
+  let limit = 5;
+  let arts = articles.adminArticles;
 
   const editArtsAction = (id) => {
     props.history.push(`/dashboard/articles/edit/${id}`);
+  };
+
+  const handleClose = () => setRemoveAlert(false);
+  const handleShow = (id = null) => {
+    setToRemove(id);
+    setRemoveAlert(true);
+  };
+
+  const handleDelete = () => {
+    dispatch(removeArticle(toRemove));
   };
 
   const handleStatusChange = (status, _id) => {
@@ -34,33 +54,46 @@ const Articles = (props) => {
   };
 
   const goToPrevPage = (page) => {
-    dispatch(getPaginateArticles(page));
+    dispatch(getPaginateArticles(page, limit, searchValues.memory));
   };
 
   const goToNextPage = (page) => {
-    dispatch(getPaginateArticles(page));
+    dispatch(getPaginateArticles(page, limit, searchValues.memory));
   };
 
-  const handleClose = () => setRemoveAlert(false);
-  const handleShow = (id = null) => {
-    setArticleToRemove(id);
-    setRemoveAlert(true);
+  const triggerSearch = (e) => {
+    e.preventDefault();
+    if (searchValues.value !== "") {
+      setSearchValues({ memory: searchValues.value });
+    }
   };
 
-  const handleDelete = () => {
-    dispatch(removeArticle(articleToRemove));
+  const resetSearch = () => {
+    setSearchValues({ memory: "", value: "" });
+    dispatch(getPaginateArticles(1, limit));
   };
+
+  useEffect(() => {
+    setLoading(true);
+    dispatch(getPaginateArticles(1, limit, searchValues.memory));
+  }, [dispatch, searchValues.memory, limit]);
+
+  useEffect(() => {
+    setLoading(false);
+  }, [articles]);
+
+  useEffect(() => {
+    handleClose();
+    if (notifications && notifications.removeArticle) {
+      dispatch(getPaginateArticles(arts.page, limit, searchValues.memory));
+    }
+  }, [dispatch, notifications, arts, limit, searchValues.memory]);
 
   useEffect(() => {
     dispatch(getPaginateArticles());
   }, [dispatch]);
 
-  useEffect(() => {
-    handleClose();
-    if (notifications && notifications.articleRemoved) {
-      dispatch(getPaginateArticles(articles.page));
-    }
-  }, [dispatch, notifications, articles]);
+  console.log(searchValues);
 
   return (
     <AdminLayout section="Articles">
@@ -68,37 +101,64 @@ const Articles = (props) => {
         <ButtonToolbar className="mb-3">
           <ButtonGroup className="mr-2">
             <LinkContainer to="/dashboard/articles/add">
-              <Button variant="secondary">Add Article</Button>
+              <Button variant="secondary">Add article</Button>
             </LinkContainer>
           </ButtonGroup>
-          <form onSubmit={() => alert("search")}>
+          <form onSubmit={triggerSearch}>
             <InputGroup>
               <InputGroup.Prepend>
-                <InputGroup.Text id="btnGroupAddon2">
-                  <SearchIcon />
-                </InputGroup.Text>
+                <InputGroup.Text id="btnGroupAddon2">@</InputGroup.Text>
               </InputGroup.Prepend>
-              <FormControl type="text" placeholder="Example" />
+              <FormControl
+                type="text"
+                placeholder="Example"
+                value={searchValues.value}
+                onChange={(e) => setSearchValues({ value: e.target.value })}
+              />
             </InputGroup>
           </form>
         </ButtonToolbar>
 
-        <ArticlesPagination
-          articles={articles}
-          prev={(page) => goToPrevPage(page)}
-          next={(page) => goToNextPage(page)}
-          handleShow={(id) => handleShow(id)}
-          handleStatusChange={(status, id) => handleStatusChange(status, id)}
-          editArtsAction={(id) => editArtsAction(id)}
-        />
+        {loading ? (
+          <Loader />
+        ) : (
+          <>
+            <div>
+              {searchValues.memory !== "" ? (
+                <p>
+                  Your search for <b>"{searchValues.memory}"</b> had{" "}
+                  {articles.adminArticles.totalDocs} result.
+                  <span
+                    style={{ color: "blue", cursor: "pointer" }}
+                    onClick={() => resetSearch()}
+                  >
+                    RESET SEARCH
+                  </span>
+                </p>
+              ) : null}
+            </div>
+
+            <PaginationComponent
+              arts={arts}
+              prev={(page) => goToPrevPage(page)}
+              next={(page) => goToNextPage(page)}
+              handleShow={(id) => handleShow(id)}
+              handleStatusChange={(status, id) =>
+                handleStatusChange(status, id)
+              }
+              editArtsAction={(id) => editArtsAction(id)}
+            />
+          </>
+        )}
+
         <Modal show={removeAlert} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Are you sure?</Modal.Title>
+            <Modal.Title>Are you really sure ?</Modal.Title>
           </Modal.Header>
-          <Modal.Body>This action can not be undone.</Modal.Body>
+          <Modal.Body>There is no going back you know.</Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
-              Cancel
+              Oops, close this.
             </Button>
             <Button variant="danger" onClick={() => handleDelete()}>
               Delete
